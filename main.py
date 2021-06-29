@@ -1,10 +1,37 @@
 # This is a sample Python script.
 
+import csv
 # Press ⌥⇧X to execute it or replace it with your code.
 # Press Double ⇧ to search everywhere for classes, files, tool windows, actions, and settings.
 from decimal import Decimal
 
 import matplotlib.pyplot as plt
+
+
+class Question5:
+    def __init__(self):
+        self.data_dict = {}
+        with open('Assessment_PIBs - modelo 1.csv') as csv_file:
+            for line in csv.DictReader(csv_file):
+                self.data_dict.update(
+                    {
+                        line.pop('País'): dict({key: value for key, value in line.items()})
+                    }
+                )
+
+    def resolve_question_a(self, country: str, year: int):
+        country_selected = self.data_dict.get(country)
+        if country_selected:
+            value = country_selected.get(year)
+            if value:
+                print(f'PIB {country} em {year}: US${value} trilhões.')
+            else:
+                print('Ano não encontrado.')
+        else:
+            print('País não encontrado.')
+
+    def resolve_question_b(self, country: str, year: int):
+        ...
 
 
 class Question4:
@@ -42,6 +69,13 @@ def call_question_4():
     question4 = Question4(initial_amount, percent, support_amount, periods)
     question4.resolve()
 
+
+def call_question_5a():
+    country_name = input('Enter the country name: ')
+    year = input('Enter the year: ')
+    Question5().resolve_question_a(country_name, year)
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    call_question_4()
+    call_question_5a()
