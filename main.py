@@ -43,8 +43,26 @@ class Question5:
             except ZeroDivisionError:
                 print(float('inf'))
 
-    def resolve_question_c(self):
-        ...
+    def resolve_question_c(self, country: str):
+        country_selected = self.data_dict.get(country)
+        x_axis = []
+        y_axis = []
+        if country_selected:
+            for year, value in country_selected.items():
+                x_axis.append(year)
+                y_axis.append(value)
+        else:
+            return print('Country not found.')
+
+        plot_graph(x_axis, y_axis)
+
+
+def plot_graph(x_axis, y_axis):
+    plt.plot(x_axis, y_axis)
+    plt.xlabel('X - Total Amount')
+    plt.ylabel('X - Periods')
+    plt.title('Amount graph')
+    plt.show()
 
 
 class Question4:
@@ -64,14 +82,7 @@ class Question4:
             y_axis.append(total_amount)
             print(f'After {period + 1} period(s), the total amount will be: {total_amount:.2f}')
 
-        self.plot_graph(x_axis, y_axis)
-
-    def plot_graph(self, x_axis, y_axis):
-        plt.plot(x_axis, y_axis)
-        plt.xlabel('X - Total Amount')
-        plt.ylabel('X - Periods')
-        plt.title('Amount graph')
-        plt.show()
+        plot_graph(x_axis, y_axis)
 
 
 def call_question_4():
@@ -97,6 +108,7 @@ def call_question_5c():
     country_name = input('Enter the country name: ')
     Question5().resolve_question_c(country_name)
 
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    call_question_5b()
+    call_question_5c()
