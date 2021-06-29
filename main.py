@@ -26,12 +26,22 @@ class Question5:
             if value:
                 print(f'PIB {country} em {year}: US${value} trilhões.')
             else:
-                print('Ano não encontrado.')
+                print('Year not found.')
         else:
-            print('País não encontrado.')
+            print('Country not found.')
 
-    def resolve_question_b(self, country: str, year: int):
-        ...
+    def resolve_question_b(self):
+        for key, values in self.data_dict.items():
+            current = float(values.get('2020'))
+            previous = float(values.get('2013'))
+
+            if current == previous:
+                print(f'{key}    No variation between 2013 and 2020')
+            try:
+                variation = (current - previous) / previous * 100.0
+                print(f'{key}    Variation of {variation:.4g}% between 2013 and 2020')
+            except ZeroDivisionError:
+                return float('inf')
 
 
 class Question4:
@@ -76,6 +86,10 @@ def call_question_5a():
     Question5().resolve_question_a(country_name, year)
 
 
+def call_question_5b():
+    Question5().resolve_question_b()
+
+
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    call_question_5a()
+    call_question_5b()
