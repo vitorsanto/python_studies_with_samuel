@@ -41,7 +41,10 @@ class Question5:
                 variation = (current - previous) / previous * 100.0
                 print(f'{key}    Variation of {variation:.4g}% between 2013 and 2020')
             except ZeroDivisionError:
-                return float('inf')
+                print(float('inf'))
+
+    def resolve_question_c(self):
+        ...
 
 
 class Question4:
@@ -89,6 +92,10 @@ def call_question_5a():
 def call_question_5b():
     Question5().resolve_question_b()
 
+
+def call_question_5c():
+    country_name = input('Enter the country name: ')
+    Question5().resolve_question_c(country_name)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
